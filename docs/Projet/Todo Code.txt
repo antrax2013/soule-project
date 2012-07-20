@@ -1,0 +1,3 @@
+-> refactoriser la fonctionnalité traite_action
+-> organiser les exceptions
+-> organiser les tests

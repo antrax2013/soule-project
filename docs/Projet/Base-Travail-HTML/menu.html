@@ -1,0 +1,47 @@
+<html>
+<head>
+	<link href='style.css' type='text/css' rel='stylesheet'/>
+	<!--<script src='jquery.js' type='text/javascript'></script>-->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+	<script src='menu.js' type='text/javascript'></script>
+	<title>Exemple Script Menu Déroulant Horizontal Jquery</title>
+</head>
+
+
+<body>
+<div id="header">
+	<ul id="Nav">
+		<li>
+			Test 1
+			<ul class="Menu">
+				<li><a href="#">Sous element 1</a></li>
+				<li><a href="#">Sous element 2</a></li>
+			</ul>
+		</li>
+		
+		<li>
+			Test 2
+			<ul class="Menu">
+				<li><a href="#">Sous element 3</a></li>
+				<li><a href="#">Sous element 4</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div id="reste_du_body" style="position: absolute; margin-top: 40px;"><!-- Désolé, il n'est pas très propre de mettre du code CSS dans le corps du HTML, mais pour ceux qui récupèrent le fichier style.css, ça évite d'avoir des classes qui ne lui serviraient pas -->
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et mauris velit, quis mollis velit. Morbi sem neque, suscipit vitae convallis vel, sodales ut massa. Ut est lacus, sagittis eu euismod vel, accumsan nec erat. Nulla congue pellentesque metus sit amet gravida. Sed adipiscing interdum enim, vitae pellentesque neque lobortis vitae. Vestibulum vestibulum convallis ligula sit amet consequat. Cras quis tortor eu eros hendrerit sagittis. Cras odio odio, aliquet vitae aliquam vitae, ornare a quam. Duis eget risus nisi. Vestibulum scelerisque, tellus ac consectetur vestibulum, sem arcu molestie mauris, non volutpat arcu quam accumsan arcu. Fusce tempus, ante sed aliquam ullamcorper, leo ante pellentesque odio, quis tempus elit metus sed lectus. Sed et risus odio, vitae facilisis lorem. In at turpis in eros varius iaculis et ac felis. Aenean lobortis, quam a bibendum ultricies, arcu nunc gravida urna, in dapibus augue augue sed eros. Etiam ligula magna, tincidunt eget placerat ullamcorper, ultrices ut mi. Duis in turpis enim, aliquet faucibus nunc. Maecenas semper orci sit amet leo ultricies nec suscipit nisi auctor.</p>
+
+<p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut sed posuere nisi. Aliquam erat volutpat. Sed lectus lorem, dignissim a luctus lobortis, venenatis vitae ipsum. Nulla non nisl ut purus vehicula lacinia. Praesent ut libero nunc. Nulla at urna enim, a semper sem. Quisque sodales hendrerit tortor, non dignissim orci tempor quis. Vivamus facilisis bibendum faucibus. In pretium lacinia neque. Phasellus a justo turpis, sit amet bibendum turpis. Duis accumsan erat in nisl pulvinar a semper sem malesuada. Aliquam imperdiet aliquam nulla, in ultricies turpis tempus quis. Nunc faucibus ultricies enim, a lobortis dolor hendrerit ac. Suspendisse ut purus sodales lorem imperdiet ultrices ac sit amet velit. Quisque iaculis cursus lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+<p>Fusce ultrices tempor justo ac mattis. Vivamus pulvinar, risus sed vestibulum feugiat, sem odio cursus urna, a eleifend mi velit vitae orci. Nam fermentum faucibus velit, in laoreet urna gravida rhoncus. Integer dui nunc, rhoncus eget congue nec, imperdiet vitae felis. Nunc sit amet purus a orci dapibus consectetur. Cras dolor ante, tincidunt rutrum egestas ut, feugiat vel tellus. In pharetra mi eu quam interdum vel consequat augue fringilla. Maecenas felis ante, dictum quis volutpat sit amet, congue et mi. Donec nec sagittis odio. Nam id eros dolor, vitae tincidunt libero. Donec vehicula turpis sit amet turpis aliquet ut ultricies odio fringilla. Vivamus ultricies lorem vitae velit ultrices varius. Pellentesque neque diam, vestibulum vel pretium malesuada, vehicula dignissim purus. Mauris ut sapien nec neque hendrerit ornare vitae ac justo. Pellentesque egestas interdum neque sit amet commodo. Nam nec odio id velit rutrum vehicula quis ut urna. Etiam vel nisl nibh, vel placerat massa.</p>
+
+<p>Aenean vitae pharetra ligula. Nulla sed convallis erat. Morbi a sem vestibulum massa dignissim pulvinar. Vivamus ullamcorper dapibus mauris, sit amet varius nulla viverra sed. Aliquam condimentum sapien quis nisl dapibus a ullamcorper turpis vestibulum. Duis eu lectus id elit blandit consectetur vitae at quam. Vestibulum porta iaculis rhoncus. Praesent tellus libero, dignissim eget feugiat id, mattis eget lorem. Aliquam ornare, magna consequat aliquam congue, neque risus varius augue, et tristique ante eros nec lacus. Vivamus malesuada tortor vel neque bibendum sodales iaculis quam pharetra. Mauris ultricies ornare tellus ut feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla fringilla dictum bibendum. Etiam ipsum eros, gravida sed semper et, dictum a felis. Nullam nec eros et velit varius lacinia non ac augue. Etiam eget nulla odio.</p>
+
+<p>Vestibulum fringilla augue eget velit tincidunt scelerisque. Proin sem magna, pharetra in malesuada non, posuere sed metus. Maecenas tincidunt gravida felis sit amet mattis. Sed fringilla dolor vel nisi adipiscing et tincidunt turpis aliquam. Cras velit felis, lacinia sed tincidunt et, semper porttitor odio. Morbi ultricies enim vel nibh faucibus vehicula. Pellentesque nec mi sed nisi pharetra posuere consectetur ac arcu. Duis facilisis mauris nec mi fermentum eu pretium lacus volutpat. Morbi ut pulvinar nunc. Aenean eget lectus nunc, ac ullamcorper est. Duis vel aliquet justo. Nunc volutpat congue mauris, et vehicula dui consectetur a. Nullam quis massa eget turpis volutpat accumsan vitae sed velit. Sed et elit ut turpis bibendum pulvinar. Suspendisse vel nulla dolor. Sed posuere faucibus orci, gravida rhoncus purus varius nec. Nulla facilisi. In placerat malesuada malesuada.</p>
+
+<p><a href="http://www.astucesdewebmaster.com/developpement-web/menu-deroulant-horizontal-jquery-28">Article Menu Déroulant Horizontal JQuery sur AstucesdeWebmaster.com</a></p>
+</div>
+</body>
+
+
+</html>
