@@ -1,0 +1,1 @@
+pdepend --summary-xml="C:\EclipseWorkspace\soule\Mesures\Dependances\summary.xml" --jdepend-chart="C:\EclipseWorkspace\soule\Mesures\Dependances\jdepend.svg" --overview-pyramid="C:\EclipseWorkspace\soule\Mesures\Dependances\pyramid.svg" "C:\EclipseWorkspace\soule\Library\Moteur"

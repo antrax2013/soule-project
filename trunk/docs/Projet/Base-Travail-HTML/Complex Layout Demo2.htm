@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0047)http://layout.jquery-dev.net/demos/complex.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%; overflow-x: hidden; overflow-y: hidden; "><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="language" content="en">
+	<!-- uncomment 'base' to view this page without external files
+	<base href="http://jquery-border-layout.googlecode.com/svn/trunk/" />
+	-->
+
+	<title>Complex Layout Demo</title>
+
+	<!-- DEMO styles - specific to this page -->
+	<link rel="stylesheet" type="text/css" href="./Complex Layout Demo_files/complex.css">
+	<link rel="stylesheet" type="text/css" href="Css/trontastic/jquery-ui-1.8.18.custom.css">
+	<!--[if lte IE 7]>
+		<style type="text/css"> body { font-size: 85%; } </style>
+	<![endif]-->
+
+	<script type="text/javascript" src="./Complex Layout Demo_files/jquery-latest.js"></script>
+	<script type="text/javascript" src="./Complex Layout Demo_files/jquery-ui-latest.js"></script>
+	<script type="text/javascript" src="./Complex Layout Demo_files/jquery.layout-latest.js"></script>
+	<script type="text/javascript" src="./Complex Layout Demo_files/complex.js"></script>
+
+ <!-- FUTURE REFERENCE - ACCESS TO EXTERNAL LIBRARIES
+	<script type="text/javascript" src="http://jquery-border-layout.googlecode.com/svn/trunk/jquery.layout.js"></script>
+	<script type="text/javascript" src="http://ui.jquery.com/js/jquery.js"></script>
+	<script type="text/javascript" src="http://ui.jquery.com/js/ui.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="http://dev.jquery.com/view/tags/ui/latest/ui/ui.core.js"></script>
+	<script type="text/javascript" src="http://dev.jquery.com/view/tags/ui/latest/ui/ui.draggable.js"></script>
+	<script type="text/javascript" src="http://dev.jquery.com/view/tags/ui/latest/ui/effects.core.js"></script>
+	<script type="text/javascript" src="http://dev.jquery.com/view/tags/ui/latest/ui/effects.slide.js"></script>
+	<script type="text/javascript" src="http://dev.jquery.com/view/tags/ui/latest/ui/effects.drop.js"></script>
+	<script type="text/javascript" src="http://dev.jquery.com/view/tags/ui/latest/ui/effects.scale.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://dev.jquery.com/view/tags/ui/latest/themes/flora/flora.all.css" />
+ -->
+
+<script type="text/javascript">
+/*
+ * complex.html
+ *
+ * This is a demonstration page for the jQuery layout widget
+ *
+ *	NOTE: For best code readability, view this with a fixed-space font and tabs equal to 4-chars
+ */
+
+	var outerLayout, innerLayout;
+
+	/*
+	*#######################
+	*     ON PAGE LOAD
+	*#######################
+	*/
+	$(document).ready( function() {
+		// create the OUTER LAYOUT
+		outerLayout = $("body").layout( layoutSettings_Outer );
+
+		/*******************************
+		 ***  CUSTOM LAYOUT BUTTONS  ***
+		 *******************************
+		 *
+		 * Add SPANs to the east/west panes for customer "close" and "pin" buttons
+		 *
+		 * COULD have hard-coded span, div, button, image, or any element to use as a 'button'...
+		 * ... but instead am adding SPANs via script - THEN attaching the layout-events to them
+		 *
+		 * CSS will size and position the spans, as well as set the background-images
+		 */
+
+		// BIND events to hard-coded buttons in the NORTH toolbar
+		outerLayout.addToggleBtn( "#tbarToggleNorth", "north" );
+		outerLayout.addOpenBtn( "#tbarOpenSouth", "south" );
+		outerLayout.addCloseBtn( "#tbarCloseSouth", "south" );
+		outerLayout.addPinBtn( "#tbarPinWest", "west" );
+		outerLayout.addPinBtn( "#tbarPinEast", "east" );
+
+		// save selector strings to vars so we don't have to repeat it
+		// must prefix paneClass with "body > " to target ONLY the outerLayout panes
+		var westSelector = "body > .ui-layout-west"; // outer-west pane
+		var eastSelector = "body > .ui-layout-east"; // outer-east pane
+
+		 // CREATE SPANs for pin-buttons - using a generic class as identifiers
+		$("<span></span>").addClass("pin-button").prependTo( westSelector );
+		$("<span></span>").addClass("pin-button").prependTo( eastSelector );
+		// BIND events to pin-buttons to make them functional
+		outerLayout.addPinBtn( westSelector +" .pin-button", "west");
+		outerLayout.addPinBtn( eastSelector +" .pin-button", "east" );
+
+		 // CREATE SPANs for close-buttons - using unique IDs as identifiers
+		$("<span></span>").attr("id", "west-closer" ).prependTo( westSelector );
+		$("<span></span>").attr("id", "east-closer").prependTo( eastSelector );
+		// BIND layout events to close-buttons to make them functional
+		outerLayout.addCloseBtn("#west-closer", "west");
+		outerLayout.addCloseBtn("#east-closer", "east");
+
+
+		/* Create the INNER LAYOUT - nested inside the 'center pane' of the outer layout
+		 * Inner Layout is create by createInnerLayout() function - on demand
+		 *
+			innerLayout = $("div.pane-center").layout( layoutSettings_Inner );
+		 *
+		 */
+
+
+		// DEMO HELPER: prevent hyperlinks from reloading page when a 'base.href' is set
+		$("a").each(function () {
+			var path = document.location.href;
+			if (path.substr(path.length-1)=="#") path = path.substr(0,path.length-1);
+			if (this.href.substr(this.href.length-1) == "#") this.href = path +"#";
+		});
+
+	});
+
+
+	/*
+	*#######################
+	* INNER LAYOUT SETTINGS
+	*#######################
+	*
+	* These settings are set in 'list format' - no nested data-structures
+	* Default settings are specified with just their name, like: fxName:"slide"
+	* Pane-specific settings are prefixed with the pane name + 2-underscores: north__fxName:"none"
+	*/
+	layoutSettings_Inner = {
+		applyDefaultStyles:				true // basic styling for testing & demo purposes
+	,	minSize:						20 // TESTING ONLY
+	,	spacing_closed:					14
+	,	north__spacing_closed:			8
+	,	south__spacing_closed:			8
+	,	north__togglerLength_closed:	-1 // = 100% - so cannot 'slide open'
+	,	south__togglerLength_closed:	-1
+	,	fxName:							"slide" // do not confuse with "slidable" option!
+	,	fxSpeed_open:					1000
+	,	fxSpeed_close:					2500
+	,	fxSettings_open:				{ easing: "easeInQuint" }
+	,	fxSettings_close:				{ easing: "easeOutQuint" }
+	,	north__fxName:					"none"
+	,	south__fxName:					"drop"
+	,	south__fxSpeed_open:			500
+	,	south__fxSpeed_close:			1000
+	//,	initClosed:						true
+	,	center__minWidth:				200
+	,	center__minHeight:				200
+	};
+
+
+	/*
+	*#######################
+	* OUTER LAYOUT SETTINGS
+	*#######################
+	*
+	* This configuration illustrates how extensively the layout can be customized
+	* ALL SETTINGS ARE OPTIONAL - and there are more available than shown below
+	*
+	* These settings are set in 'sub-key format' - ALL data must be in a nested data-structures
+	* All default settings (applied to all panes) go inside the defaults:{} key
+	* Pane-specific settings go inside their keys: north:{}, south:{}, center:{}, etc
+	*/
+	var layoutSettings_Outer = {
+		name: "outerLayout" // NO FUNCTIONAL USE, but could be used by custom code to 'identify' a layout
+		// options.defaults apply to ALL PANES - but overridden by pane-specific settings
+	,	defaults: {
+			size:					"auto"
+		,	minSize:				50
+		,	paneClass:				"pane" 		// default = 'ui-layout-pane'
+		,	resizerClass:			"resizer"	// default = 'ui-layout-resizer'
+		,	togglerClass:			"toggler"	// default = 'ui-layout-toggler'
+		,	buttonClass:			"button"	// default = 'ui-layout-button'
+		,	contentSelector:		".content"	// inner div to auto-size so only it scrolls, not the entire pane!
+		,	contentIgnoreSelector:	"span"		// 'paneSelector' for content to 'ignore' when measuring room for content
+		,	togglerLength_open:		35			// WIDTH of toggler on north/south edges - HEIGHT on east/west edges
+		,	togglerLength_closed:	35			// "100%" OR -1 = full height
+		,	hideTogglerOnSlide:		true		// hide the toggler when pane is 'slid open'
+		,	togglerTip_open:		"Close This Pane"
+		,	togglerTip_closed:		"Open This Pane"
+		,	resizerTip:				"Resize This Pane"
+		//	effect defaults - overridden on some panes
+		,	fxName:					"slide"		// none, slide, drop, scale
+		,	fxSpeed_open:			750
+		,	fxSpeed_close:			1500
+		,	fxSettings_open:		{ easing: "easeInQuint" }
+		,	fxSettings_close:		{ easing: "easeOutQuint" }
+	}
+	,	north: {
+			spacing_open:			1			// cosmetic spacing
+		,	togglerLength_open:		0			// HIDE the toggler button
+		,	togglerLength_closed:	-1			// "100%" OR -1 = full width of pane
+		,	resizable: 				false
+		,	slidable:				false
+		//	override default effect
+		,	fxName:					"none"
+		}
+	,	south: {
+			maxSize:				200
+		,	spacing_closed:			0			// HIDE resizer & toggler when 'closed'
+		,	slidable:				false		// REFERENCE - cannot slide if spacing_closed = 0
+		,	initClosed:				true
+		//	CALLBACK TESTING...
+		,	onhide_start:			function () { return confirm("START South pane hide \n\n onhide_start callback \n\n Allow pane to hide?"); }
+		,	onhide_end:				function () { alert("END South pane hide \n\n onhide_end callback"); }
+		,	onshow_start:			function () { return confirm("START South pane show \n\n onshow_start callback \n\n Allow pane to show?"); }
+		,	onshow_end:				function () { alert("END South pane show \n\n onshow_end callback"); }
+		,	onopen_start:			function () { return confirm("START South pane open \n\n onopen_start callback \n\n Allow pane to open?"); }
+		,	onopen_end:				function () { alert("END South pane open \n\n onopen_end callback"); }
+		,	onclose_start:			function () { return confirm("START South pane close \n\n onclose_start callback \n\n Allow pane to close?"); }
+		,	onclose_end:			function () { alert("END South pane close \n\n onclose_end callback"); }
+		//,	onresize_start:			function () { return confirm("START South pane resize \n\n onresize_start callback \n\n Allow pane to be resized?)"); }
+		,	onresize_end:			function () { alert("END South pane resize \n\n onresize_end callback \n\n NOTE: onresize_start event was skipped."); }
+		}
+	,	west: {
+			size:					250
+		,	spacing_closed:			21			// wider space when closed
+		,	togglerLength_closed:	21			// make toggler 'square' - 21x21
+		,	togglerAlign_closed:	"top"		// align to top of resizer
+		,	togglerLength_open:		0			// NONE - using custom togglers INSIDE west-pane
+		,	togglerTip_open:		"Close West Pane"
+		,	togglerTip_closed:		"Open West Pane"
+		,	resizerTip_open:		"Resize West Pane"
+		,	slideTrigger_open:		"click" 	// default
+		,	initClosed:				true
+		//	add 'bounce' option to default 'slide' effect
+		,	fxSettings_open:		{ easing: "easeOutBounce" }
+		}
+	,	east: {
+			size:					250
+		,	spacing_closed:			21			// wider space when closed
+		,	togglerLength_closed:	21			// make toggler 'square' - 21x21
+		,	togglerAlign_closed:	"top"		// align to top of resizer
+		,	togglerLength_open:		0 			// NONE - using custom togglers INSIDE east-pane
+		,	togglerTip_open:		"Close East Pane"
+		,	togglerTip_closed:		"Open East Pane"
+		,	resizerTip_open:		"Resize East Pane"
+		,	slideTrigger_open:		"mouseover"
+		,	initClosed:				true
+		//	override default effect, speed, and settings
+		,	fxName:					"drop"
+		,	fxSpeed:				"normal"
+		,	fxSettings:				{ easing: "" } // nullify default easing
+		}
+	,	center: {
+			paneSelector:			"#mainContent" 			// sample: use an ID to select pane instead of a class
+		,	onresize:				"innerLayout.resizeAll"	// resize INNER LAYOUT when center pane resizes
+		,	minWidth:				200
+		,	minHeight:				200
+		}
+	};
+
+</script>
+
+</head>
+<body class="ui-layout-container" style="position: relative; height: 100%; overflow-x: hidden; overflow-y: hidden; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; border-width: initial; border-color: initial; border-image: initial; ">
+
+<div class="ui-layout-west pane pane-west" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; width: 248px; left: 0px; right: auto; z-index: 0; top: 95px; bottom: 0px; height: 603px; position: absolute; visibility: visible; display: none; "><span id="west-closer" class="button-close button-close-west" title="Close"></span><span class="pin-button button-pin button-pin-west button-pin-up button-pin-west-up" pin="up" title="Pin"></span>
+
+	<div class="header">Outer - West</div>
+
+	<div class="content" style="position: relative; height: 576px; visibility: visible; ">
+		<h3><b>Outer Layout</b></h3>
+		<ul>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.toggle(&#39;north&#39;)">Toggle North</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.toggle(&#39;south&#39;)">Toggle South</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.toggle(&#39;west&#39;)"> Toggle West</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.toggle(&#39;east&#39;)"> Toggle East</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.hide(&#39;north&#39;)">Hide North</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.hide(&#39;south&#39;)">Hide South</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.show(&#39;south&#39;, false)">Unhide South</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.hide(&#39;east&#39;)"> Hide East</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.show(&#39;east&#39;, false)">Unhide East</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.open(&#39;east&#39;)"> Open East</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.open(&#39;north&#39;); outerLayout.sizePane(&#39;north&#39;, &#39;auto&#39;)">  Resize North="auto"</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.sizePane(&#39;north&#39;, 100); outerLayout.open(&#39;north&#39;)">  Resize North=100</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.sizePane(&#39;north&#39;, 300); outerLayout.open(&#39;north&#39;)">  Resize North=300</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.sizePane(&#39;north&#39;, 10000); outerLayout.open(&#39;north&#39;)">Resize North=10000</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.open(&#39;south&#39;); outerLayout.sizePane(&#39;south&#39;, &#39;auto&#39;)">  Resize South="auto"</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.sizePane(&#39;south&#39;, 100); outerLayout.open(&#39;south&#39;)">  Resize South=100</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.sizePane(&#39;south&#39;, 300); outerLayout.open(&#39;south&#39;)">  Resize South=300</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.sizePane(&#39;south&#39;, 10000); outerLayout.open(&#39;south&#39;)">Resize South=10000</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;#FCC&#39;)">North Color = Red</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;#CFC&#39;)">North Color = Green</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.panes.north.css(&#39;backgroundColor&#39;,&#39;&#39;)">    North Color = Default</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="alert(&#39;outerLayout.name = \&#39;&#39;+outerLayout.options.name+&#39;\&#39;&#39;)">Show Layout Name</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showOptions(outerLayout,&#39;defaults&#39;)">Show Options.Defaults</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showOptions(outerLayout,&#39;north&#39;)">   Show Options.North</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showOptions(outerLayout,&#39;south&#39;)">   Show Options.South</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showOptions(outerLayout,&#39;west&#39;)">    Show Options.West</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showOptions(outerLayout,&#39;east&#39;)">    Show Options.East</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showOptions(outerLayout,&#39;center&#39;)">  Show Options.Center</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showState(outerLayout,&#39;container&#39;)"> Show State.Container</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showState(outerLayout,&#39;north&#39;)">     Show State.North</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showState(outerLayout,&#39;south&#39;)">     Show State.South</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showState(outerLayout,&#39;west&#39;)">      Show State.West</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showState(outerLayout,&#39;east&#39;)">      Show State.East</a></li>
+			<li><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="showState(outerLayout,&#39;center&#39;)">    Show State.Center</a></li>
+		</ul>
+	</div>
+
+	<div class="footer">Automatically positioned footer</div>
+
+</div>
+
+<div class="ui-layout-east pane pane-east" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; width: 248px; right: 0px; z-index: 0; left: auto; top: 95px; bottom: 0px; height: 603px; position: absolute; visibility: visible; display: none; "><span id="east-closer" class="button-close button-close-east" title="Close"></span><span class="pin-button button-pin button-pin-east button-pin-up button-pin-east-up" pin="up" title="Pin"></span>
+
+	<div class="header">Outer - East</div>
+
+	<div id="accordion" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" role="tablist">
+				<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-state-active ui-corner-top" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#">Section 1</a></h3>
+				<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active" style="height: 122px; " role="tabpanel">
+					<p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+				</div>
+				<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span><a href="#">Section 2</a></h3>
+				<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="height: 122px; display: none; " role="tabpanel">
+					<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
+				</div>
+				<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span><a href="#">Section 3</a></h3>
+				<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="height: 122px; display: none; " role="tabpanel">
+					<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
+					<ul>
+						<li>List item one</li>
+						<li>List item two</li>
+						<li>List item three</li>
+					</ul>
+				</div>
+			</div>
+</div>
+
+
+<div class="ui-layout-north pane pane-north ui-widget-content" style="position: absolute; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; bottom: auto; width: auto; z-index: 0; top: 0px; left: 0px; right: 0px; visibility: visible; display: block; height: 93px; ">
+	<div class="ui-widget-header" ><center>Soule Royale</center></div>
+	<div id="tabs" class="ui-tabs ui-widget ui-widget-content">
+	     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix">
+	         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">First</a></li>
+		 <li class="ui-state-default ui-corner-top"><a href="#tabs-2">Second</a></li>
+		 <li class="ui-state-default ui-corner-top"><a href="#tabs-3">Third</a></li>
+	    </ul>
+	</div>
+</div>
+
+
+<div class="ui-layout-south pane pane-south" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; width: auto; bottom: 0px; left: 0px; right: 0px; z-index: 0; top: auto; height: 83px; position: absolute; display: none; visibility: visible; ">
+	<div class="header">Outer - South</div>
+	<div class="content" style="position: relative; ">
+		<p>I only have a resizer/toggler when 'open'</p>
+	</div>
+</div>
+
+
+<div id="mainContent" style="position: absolute; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; z-index: 0; display: block; visibility: visible; top: 95px; bottom: 0px; left: 21px; right: 21px; width: 1078px; height: 573px; " class="pane pane-center pane-hover pane-center-hover pane-open-hover pane-center-open-hover">
+	<!-- DIVs for the INNER LAYOUT -->
+
+	<div class="ui-layout-center">
+		<h3 class="header">Inner - Center</h3>
+		<div class="ui-layout-content">
+		
+			<p id="createInner2" style="font-weight: bold;"><a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="createInnerLayout(); return false;">Click here to CREATE the Inner Layout</a></p><!-- outerLayout.open('east');  -->
+
+			<p>See the <a href="http://layout.jquery-dev.net/demos/complex.html#" onclick="outerLayout.open(&#39;east&#39;); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
+
+			<p><a href="http://layout.jquery-dev.net/demos.html">Go to the Demos page</a></p>
+
+			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+			<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+		</div>
+		<div class="footer">Center panes can have headers &amp; footers too</div>
+	</div>
+
+	<div class="ui-layout-north"> Inner - North</div>
+	<div class="ui-layout-south"> Inner - South</div>
+	<div class="ui-layout-west">  Inner - West</div>
+	<div class="ui-layout-east">  Inner - East
+		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+		<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	</div>
+
+</div>
+
+
+
+ <div id="" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; cursor: default; top: 94px; width: 1152px; height: 1px; left: 0px; " class="resizer resizer-north resizer-open resizer-north-open"><div id="" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; width: 1152px; height: 6px; left: 0px; top: 0px; display: none; " class="toggler toggler-north toggler-open toggler-north-open" title="Close This Pane"></div></div><div id="" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; width: 1152px; height: 6px; left: 0px; bottom: 0px; cursor: default; display: none; " class="resizer resizer-south resizer-closed resizer-south-closed ui-draggable-disabled" aria-disabled="true" title=""><div id="" style="position: absolute; display: block; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; width: 35px; height: 6px; left: 558px; top: 0px; " class="toggler toggler-south toggler-closed toggler-south-closed" title="Open This Pane"></div></div><div title="Slide Open" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; left: 0px; cursor: pointer; height: 603px; width: 21px; top: 95px; " id="" class="resizer resizer-west resizer-closed resizer-west-closed ui-draggable-disabled" aria-disabled="true"><div id="" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; display: block; height: 21px; width: 21px; top: 0px; left: 0px; " class="toggler toggler-west toggler-closed toggler-west-closed" title="Open West Pane"></div></div><div title="Slide Open" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; right: 0px; cursor: pointer; height: 603px; width: 21px; top: 95px; " id="" class="resizer resizer-east resizer-closed resizer-east-closed ui-draggable-disabled" aria-disabled="true"><div id="" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; display: block; height: 21px; width: 21px; top: 0px; left: 0px; " class="toggler toggler-east toggler-closed toggler-east-closed" title="Open East Pane"></div></div></body></html>
