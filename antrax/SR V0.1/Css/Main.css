@@ -1,0 +1,168 @@
+﻿@CHARSET "ISO-8859-1";
+body,html {
+	font-size:95%;
+	margin:0;
+	padding: 0.15em;
+	font-family: Segoe UI, Helvetica, Arial, sans-serif; 
+	color: #222;
+	background: #fff url(./custom-theme/images/ui-bg_diagonals-small_50_262626_40x40.png) 50% 50%;
+}
+
+h1 { font-size:1.4em; }
+h2 { font-size:1.2em; }
+h3 { font-size:1.1em; }
+
+input{ width:20em;} 
+
+a { color: #222; text-decoration: none; }
+a:hover{ text-decoration: underline;}	
+
+.erreur, .rouge, .Equipe1 { color:red;}
+.Equipe2 { color:blue;}
+.obligatoire { font-weight:bold;}
+
+/* Conteneurs */
+#Wrapper { 
+	background:white;
+	/*background:purple;*/
+	/*margin: 1% 1%;*/
+}
+
+#Header { 
+	margin: 0;
+	padding:0;
+	background:white url(../Images/fond-blanc.png)  50% 50%;
+}
+
+#Menu-Horizontal , #Footer {
+	/*float: left; */
+	clear: left;
+	/*background-color:aqua;*/
+	text-align: center;	
+	width:  100%;
+	/*visibility: visible;	*/
+	height: 1.7em;
+	min-height: 1.7em;
+	max-height: 1.7em;
+	border-left: none;
+	border-right:none;	
+	/*background-attachment:fixed;*/
+}
+
+#Main-Content {
+	/*background-color:aqua;*/
+	margin: 0.5%;
+	min-height: 36.5em;
+	clear:right;
+}
+	#News-Content{
+		/*background:yellow;*/
+		/*margin: 0em;
+		padding: 0em 2em;*/
+		font-size:0.8em;
+		/*display:inline;*/
+		vertical-align: text-top;
+	}
+	#Content-Menu {
+		background: url(./custom-theme/images/ui-bg_diagonals-small_50_262626_40x40.png) 50% 50%;
+		float: left;	
+		min-height: 45.8em;
+		max-width:15%;
+		margin-right: 0.5em;
+	}
+		
+	#Menu-Vertical-Inner-Content{
+		background:white;
+		/*clear:left;*/		
+		margin:1em;
+	}
+	
+	#Content-Page {
+		margin:0;
+		padding: 0.15em;
+		background: url(./custom-theme/images/ui-bg_diagonals-small_50_262626_40x40.png) 50% 50%;
+		/*overflow-y: hidden;*/
+		min-height: 45.5em;
+		/*max-width: 97em;*/
+		/*background-color:orange;*/
+	}
+		#Content {			
+			background:white;
+			margin: 0.5em;
+			height: 44.5em;
+			min-width: 40em;
+		}
+		
+		#Current-Navigation{
+			color: #222;
+			/*background-color:purple;*/
+			padding:0em 1.5em 0em 1.5em;
+			/*background:none;*/
+		}
+		
+		#Page {
+			overflow-y:auto;
+			/*background-color:brown;*/
+			padding:0 1.5em 0 1.5em;
+			height: 40em;
+			min-width: 40em;
+			border:none;			
+		}	
+		
+		#Page p { 
+			text-align:justify;
+			/*text-indent:1em;*/
+		}
+
+/* Elements */
+#Cartouche-Haut {
+	padding: 1em; 
+	/*background-color:red*/
+}
+
+#Main-Button {
+  text-align: right;
+  visibility: visible;
+  float: right;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+}
+
+/* Detail à sortir */
+#Menu-Horizontal a, #Footer a {
+	text-decoration: None;
+	vertical-align: middle;
+	padding: 0 0.5em 0;
+}
+
+#Footer a:hover {
+	text-decoration: underline;
+}
+
+#Footer #icone {
+	vertical-align: middle;
+	display: inline;
+	height:1.9em;
+	border:none;
+}
+
+#logo {
+	vertical-align: middle;
+	display: inline;
+	height:5em;
+	border:none;
+}
+
+/*
+label {
+	width: 100px;
+	display: block;
+	float: left;
+}
+
+#formbutton {
+	margin-left: 100px;
+}
+
+*/
