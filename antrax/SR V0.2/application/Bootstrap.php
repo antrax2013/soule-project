@@ -8,13 +8,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('View');
         $view = $this->getResource('View');
 
-        // Précise le titre initial et le séparateur:
+        // Prï¿½cise le titre initial et le sï¿½parateur:
         $view->headTitle("Soule Royale")->setSeparator(' - ');
     }
 	
 	protected function _initView()
 	{
-		// Création et paramétrage de la vue
+		// Crï¿½ation et paramï¿½trage de la vue
 		$view = new Zend_View();
 		$view->setEncoding('utf-8');
 		$view->headMeta()->setHttpEquiv('Content-type', 'text/html; charset=utf-8');
@@ -23,7 +23,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
 		$jquery = $view->jQuery();
 		$jquery->enable();
-		
+
 		// Si vous ne souhaitez pas utiliser google
 		// on peut demander r ZendX _ JQuery de travailler
 		// avec une bibliothcque locale
@@ -32,7 +32,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		//$jquery->setRenderMode($rmode);
 		//$jquery->addJavascriptFile('../scripts/jquery-1.3.2.min.js');
 		
-		// Enregistrement de l’objet $view comme vue principale
+		// Enregistrement de lï¿½objet $view comme vue principale
 		$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 		$viewRenderer->setView($view);
 		Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);

@@ -10,8 +10,9 @@
 /**
 Méthode Principale
 */
-(function()
+$(document).ready((function()
 {
+    //console.log('start');
     // A la sortie d'un input
 	$("input").blur(function()
     {
@@ -21,11 +22,11 @@ Méthode Principale
 		//On lance la validation de l'élément
 		doValidation(formElementId);
     });
-});
+}));
 
 /**
 Méthode de validation des éléments, insère dans le dom les erreurs
-@param id : attribut id de l'élément à vérifier
+@param id  attribut id de l'élément à vérifier
 */
 function doValidation(id)
 {
@@ -40,7 +41,7 @@ function doValidation(id)
 		if(name == 'captcha')
 		{
 			data[name+'-input'] = $(this).val();
-			data[name+'-id'] = $(''captcha-id).val();
+			data[name+'-id'] = $('captcha-id').val();
 		}
 		//autres éléments
 		else data[name] = $(this).val();
@@ -56,8 +57,8 @@ function doValidation(id)
 
 /**
 Méthode de création des éléments html erreurs
-@param formErrors: tableau contenant les messages d'erreurs à ajouter
-@param id : attribut id de l'élément à vérifier
+@param formErrors tableau contenant les messages d'erreurs à ajouter
+@param id  attribut id de l'élément à vérifier
 @return renvoie le html à ajouter au DOM
 */
 function getErrorHtml(formErrors , id)
