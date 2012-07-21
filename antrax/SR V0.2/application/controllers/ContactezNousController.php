@@ -15,20 +15,20 @@ class ContactezNousController extends Zend_Controller_Action
 		//$form->addPrefixPath('SRCustom_Form_Decorator', 'SRCustom/Form/Decorator', 'decorator');
 		//$form->addElementPrefixPath('SRCustom_Form_Decorator', 'SRCustom/Form/Decorator', 'decorator');
 		
-		// on réinisialise les décorateurs
+		// on rÃ©inisialise les dÃ©corateurs
         //$form->clearDecorators();
 		
 		//$form->setDecorators(array('SRDecorator'));		
 		//$form->envoyer->setLabel('Envoyer');
 		$this->view->form = $form;
 		
-		//Si une requete http de type post est envoyée
+		//Si une requete http de type post est envoyÃ©e
 		if ($this->getRequest()->isPost()) 
 		{
-			//Récupération des données du formulaire
+			//RÃ©cupÃ©ration des donnÃ©es du formulaire
 			$formData = $this->getRequest()->getPost();
 			
-			//Vérification des validations
+			//VÃ©rification des validations
 			if ($form->isValid($formData)) 
 			{
 				$mail = new Zend_Mail();
