@@ -1,1 +1,0 @@
-phpunit --include-path "C:\EclipseWorkspace\Soule;C:\EclipseWorkspace\Soule\Library" --verbose --coverage-html "C:\EclipseWorkspace\Soule\Mesures\CouvertureTests" "C:\EclipseWorkspace\Soule\Tests"
