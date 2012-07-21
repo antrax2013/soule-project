@@ -25,4 +25,10 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
+
+//Tratuction
+$translate = new Zend_Translate('csv', APPLICATION_PATH .'/language', null, array('scan' => Zend_Translate::LOCALE_FILENAME));
+$translate->setLocale('fr_FR');
+Zend_Registry::set('Zend_Translate', $translate);
+
 $application->bootstrap()->run();

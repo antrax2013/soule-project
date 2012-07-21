@@ -40,8 +40,8 @@ class ContactezNousController extends Zend_Controller_Action
 				$RC = "<br />";
 				
 				$message= "Bonjour,".$RC."Vous venez de recevoir un mail de:".$RC;
-				$message.="Nom: ".$a_valeur["nom"].$RC;
-				$message.="Equipe: ".$a_valeur["equipe"].$RC;
+				$message.="Nom: ".$form->getValue('nom').$RC;
+				$message.="Equipe: ".$form->getValue('equipe').$RC;
 				$message.="Message:".$RC.$form->getValue('message');
 				
 				
