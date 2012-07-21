@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<projectProfile type="default" version="1.11.11">
+  <projectDirectory>
+    <projectProfileFile filesystemName=".zfproject.xml"/>
+    <applicationDirectory classNamePrefix="Application_">
+      <apisDirectory enabled="false"/>
+      <configsDirectory>
+        <applicationConfigFile type="ini"/>
+      </configsDirectory>
+      <controllersDirectory>
+        <controllerFile controllerName="Index">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="nouveautes"/>
+          <actionMethod actionName="contactezNous"/>
+        </controllerFile>
+        <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Nouveautes">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="ContactezNous">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="MentionsLegales">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="SiteMap">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="RoadMap">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Informations">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="histoire"/>
+          <actionMethod actionName="presentationGenerale"/>
+          <actionMethod actionName="regles"/>
+          <actionMethod actionName="presentationLesFormes"/>
+          <actionMethod actionName="presentationLeJeu"/>
+        </controllerFile>
+        <controllerFile controllerName="Jeux">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+      </controllersDirectory>
+      <formsDirectory>
+        <formFile formName="ContactezNous"/>
+      </formsDirectory>
+      <layoutsDirectory>
+        <layoutScriptsDirectory>
+          <layoutScriptFile layoutName="layout"/>
+        </layoutScriptsDirectory>
+      </layoutsDirectory>
+      <modelsDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Joueur"/>
+        </dbTableDirectory>
+        <modelFile modelName="JoueurMapper"/>
+        <modelFile modelName="Joueur"/>
+      </modelsDirectory>
+      <modulesDirectory enabled="false"/>
+      <viewsDirectory>
+        <viewScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Error">
+            <viewScriptFile forActionName="error"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="nouveautes"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="contactezNous"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Nouveautes">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ContactezNous">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="MentionsLegales">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="SiteMap">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="RoadMap">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Informations">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Informations">
+            <viewScriptFile forActionName="histoire"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Informations">
+            <viewScriptFile forActionName="presentationGenerale"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Informations">
+            <viewScriptFile forActionName="regles"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Informations">
+            <viewScriptFile forActionName="presentationLesFormes"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Informations">
+            <viewScriptFile forActionName="presentationLeJeu"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Jeux">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+        </viewScriptsDirectory>
+        <viewHelpersDirectory/>
+        <viewFiltersDirectory enabled="false"/>
+      </viewsDirectory>
+      <bootstrapFile filesystemName="Bootstrap.php"/>
+    </applicationDirectory>
+    <dataDirectory enabled="false">
+      <cacheDirectory enabled="false"/>
+      <searchIndexesDirectory enabled="false"/>
+      <localesDirectory enabled="false"/>
+      <logsDirectory enabled="false"/>
+      <sessionsDirectory enabled="false"/>
+      <uploadsDirectory enabled="false"/>
+    </dataDirectory>
+    <docsDirectory>
+      <file filesystemName="README.txt"/>
+    </docsDirectory>
+    <libraryDirectory>
+      <zfStandardLibraryDirectory enabled="false"/>
+    </libraryDirectory>
+    <publicDirectory>
+      <publicStylesheetsDirectory enabled="false"/>
+      <publicScriptsDirectory enabled="false"/>
+      <publicImagesDirectory enabled="false"/>
+      <publicIndexFile filesystemName="index.php"/>
+      <htaccessFile filesystemName=".htaccess"/>
+    </publicDirectory>
+    <projectProvidersDirectory enabled="false"/>
+    <temporaryDirectory enabled="false"/>
+    <testsDirectory>
+      <testPHPUnitConfigFile filesystemName="phpunit.xml"/>
+      <testPHPUnitBootstrapFile filesystemName="bootstrap.php"/>
+      <testApplicationDirectory>
+        <testApplicationControllerDirectory>
+          <testApplicationControllerFile forControllerName="Index">
+            <testApplicationActionMethod forActionName="index"/>
+            <testApplicationActionMethod forActionName="nouveautes"/>
+            <testApplicationActionMethod forActionName="contactezNous"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="Nouveautes">
+            <testApplicationActionMethod forActionName="index"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="ContactezNous">
+            <testApplicationActionMethod forActionName="index"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="MentionsLegales">
+            <testApplicationActionMethod forActionName="index"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="SiteMap">
+            <testApplicationActionMethod forActionName="index"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="RoadMap">
+            <testApplicationActionMethod forActionName="index"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="Informations">
+            <testApplicationActionMethod forActionName="index"/>
+            <testApplicationActionMethod forActionName="histoire"/>
+            <testApplicationActionMethod forActionName="presentationGenerale"/>
+            <testApplicationActionMethod forActionName="regles"/>
+            <testApplicationActionMethod forActionName="presentationLesFormes"/>
+            <testApplicationActionMethod forActionName="presentationLeJeu"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="Jeux">
+            <testApplicationActionMethod forActionName="index"/>
+          </testApplicationControllerFile>
+        </testApplicationControllerDirectory>
+      </testApplicationDirectory>
+      <testLibraryDirectory/>
+    </testsDirectory>
+  </projectDirectory>
+</projectProfile>

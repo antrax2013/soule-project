@@ -1,0 +1,83 @@
+1- installer easyphp 5.2.10
+	-> setup sur easyphp.org: http://freefr.dl.sourceforge.net/project/quickeasyphp/EasyPHP/5.2.10/EasyPHP-5.2.10-setup.exe
+	-> Créer php-cli.ini
+		* remplacer ;include_path = ".;c:\php\includes" par include_path=".;${path}\php\;${path}\php\includes;C:\Program Files\EasyPHP5.2.10\php\PEAR"
+		* modifier la variable d'envrionnement (panneau configuration/système/avancé/variables d'environnement):
+			- path: ajouter à la fin: ;C:\Program Files\EasyPHP5.2.10\php;
+		* augmenter la valeur memory_limit au minimum à 256
+
+
+2- installer Eclipse Helios / PDT
+	A partir de PHP-Helios
+	-> télécharger: http://eclipse.ialto.com/technology/epp/downloads/release/helios/R/eclipse-php-helios-win32.zip
+	-> déziper dans C:\Program Files\eclipse\eclipse-php-helios-win32
+
+	A partir du SDK classique
+	-> télécharger: http://mirror.ibcp.fr/pub/eclipse/eclipse/downloads/drops/R-3.6.2-201102101200/eclipse-SDK-3.6.2-win32.zip
+	-> déziper dans c:\program files\eclipse\eclipse-SDK-3.6.2-win32
+	-> lancer eclipse pour installer PDT
+		* Help/Install new software...
+		* selectionner Helios (http://download.eclipse.org/releases/helios)
+		* selectionner Programmings/Languages/PHP Development Tools (PDT) SDK Feature
+
+
+3- installer pear 
+en ligne de commande se déplacer dans c:\program files\EasyPHP5.2.10\php\
+	-> lancer go-pear.bat pour installer pear
+	-> confirmer en saisissant yes
+	-> appuyer sur entrer pour passer les différentes étapes.
+
+4- installer 	phpUnit (test unitaire), 
+		phpDoc (doumentation), 
+		phpCodeCoverage (couverture des tests unitaires), 
+		phpCodeSniffer (respect des nomres de codages), 
+		phpdepend (dépendances de code),
+		Php Mess Detector (Analyse de code)
+
+	en linge de commande dans c:\program files\EasyPHP5.2.10\php\
+	-> pear channel-discover pear.phpunit.de
+	-> pear channel-discover components.ez.no
+	-> pear channel-discover pear.symfony-project.com
+	-> pear channel-discover pear.phpmd.org
+	-> pear channel-discover pear.pdepend.org
+	-> pear upgrade PEAR
+	-> pear install phpunit/PHP_CodeCoverage
+	-> pear install	pear/Net_url2-0.3.1
+	-> pear install	pear/HTTP_Request2-2.0.0RC1 
+	-> pear install phpunit/PHPUnit
+	-> pear install PhpDocumentor
+	-> pear install PHP_CodeSniffer
+	-> pear install --alldeps phpmd/PHP_PMD
+	-> pear install --alldeps pdepend/PHP_Depend-beta
+	
+	-> duppliquer php.ini-recommanded et rennomer php-cli.ini
+	
+
+	-> pour tester que tout va bien en ligne de commande phpunit --help
+
+5- installer Xdebug
+	-> télécharger sur Xdebug.org: http://xdebug.org/files/php_xdebug-2.0.2-5.2.5.dll
+	-> copier/coller php_xdebug-2.0.2-5.2.5.dll dans C:\Program Files\EasyPHP5.2.10\php\ext et rennomer php_xdebug.dll
+	-> modifier le c:\program files\EasyPHP5.2.10\php\php-cli.ini et ajouter en fin 
+		zend_extension_ts="C:\Program Files\EasyPHP5.2.10\php\ext\php_xdebug.dll"
+		xdebug.remote_enable=1
+    		xdebug.remote_handler=dbgp
+		xdebug.remote_mode=req
+		xdebug.idekey=default
+		xdebug.remote_autostart=1
+
+6- paramétrer dans éclipse :
+	-> run/extarnal tools/extarnal tools configuration
+		* cliquer sur program puis new
+			- name: phpunit
+			- location: C:\Program Files\EasyPHP5.2.10\php\phpunit.bat
+			- arguments: --include-path "${project_loc}" --verbose --coverage-html "${project_loc}/docs/rapport" "${selected_resource_loc}"
+			- le restes est laissé par défaut
+	-> le svn: Subclipse
+		* Help/Install new software...
+			- name: SVN
+			- location: http://subclipse.tigris.org/update_1.6.x/
+			- cocher subclipse puis next
+		* Click droit sur le projet Team/Share Project/Svn/next
+			- Create a new repository location: https://soule-project.googlecode.com/svn/
+			- use specified folder

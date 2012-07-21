@@ -1,0 +1,31 @@
+<?php
+/*****************************
+	Vue: Site-Map
+	Controleur: site-map/index
+	Fichier: application\views\scripts\site-map
+******************************/
+$this->headTitle()->append("Le plan du site");
+$this->headMeta()->appendName('description', "Plan du site Soule Royale. La carte pour mener votre équipe de soule royale vers les plus hauts sommets.");
+?>
+<h1>Soule Royale: Le plan du site</h1>
+<ul>
+	<li><a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'index'));?>" title="Soule royale: la page d'accueil du site">Accueil</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'nouveautes', 'action'=>'index'));?>" title="Soule royale: l'actualité du site">Nouveautés</a></li>
+	<li>Informations
+	<ul>
+		<li><a href="<?php echo $this->url(array('controller'=>'informations', 'action'=>'presentation-generale'));?>" title="Soule royale: présentation générale">Présentation générale</a>
+		<ul>
+			<li><a href="<?php echo $this->url(array('controller'=>'informations', 'action'=>'presentation-les-formes'));?>" title="Soule royale: présentation des différentes formes de soule">Les diférentes formes de la soule</a></li>
+			<li><a href="<?php echo $this->url(array('controller'=>'informations', 'action'=>'presentation-le-jeu'));?>" title="Soule royale: présentation du jeu">Présentation du jeu</a></li>
+		</ul>
+		</li>
+		<li><a href="<?php echo $this->url(array('controller'=>'informations', 'action'=>'histoire'));?>" title="Soule royale: l'histoire de la soule">Histoire de la soule</a></li>
+		<li><a href="<?php echo $this->url(array('controller'=>'informations', 'action'=>'regles'));?>" title="Soule royale: les règles du jeu">Règle du jeu</a></li>
+	</ul>
+	</li>
+	<li><a href="<?php echo $this->url(array('controller'=>'contactez-nous', 'action'=>'index'));?>" title="Soule royale: contactez les responsables du site">Contactez-nous</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'mentions-legales', 'action'=>'index'));?>" title="Soule royale: les mentions légales">Mentions légales</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'site-map', 'action'=>'index'));?>" title="Soule royale: le plan du site">Plan du site</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'road-map', 'action'=>'index'));?>" title="Soule royale: le plan de route">Plan de Route</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'contactez-nous', 'action'=>'index'));?>" title="Soule royale: contactez-nous">Contactez-nous</a></li>
+</ul>

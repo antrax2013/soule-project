@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)http://layout.jquery-dev.net/demos/container_margins.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+	<title>Layout Container with Margins</title>
+
+	<link rel="stylesheet" type="text/css" href="Css/custom-theme/jquery-ui-1.8.18.custom.css">
+	<link type="text/css" rel="stylesheet" href="./Layout Container with Margins_files/layout-default-latest.css">
+	<style type="text/css">
+	html, body {
+                /*background:	#666;*/
+                background: #222 url(Css/trontastic/images/ui-bg_diagonals-small_50_262626_40x40.png) 0 50%;
+		width:		100%;
+		height:		100%;
+		padding:	0;
+		margin:		0;
+		overflow:	auto; /* when page gets too small for container min-width/height */
+	}
+	#container {
+		background:	#999;
+		min-height:	300px;
+		min-width:	600px;
+		position:	absolute;
+		top:		10px;	/* margins in pixels */
+		bottom:		10px;	/* could also use a percent */
+		left:		10px;
+		right:		10px;
+	}
+	.pane {
+		display:	none; /* will appear when layout inits */
+	}
+	</style>
+
+	<script type="text/javascript" src="./Layout Container with Margins_files/jquery-latest.js"></script>
+	<script type="text/javascript" src="./Layout Container with Margins_files/jquery-ui-latest.js"></script>
+	<script type="text/javascript" src="./Layout Container with Margins_files/jquery.layout-latest.js"></script>
+	<script type="text/javascript">
+
+	$(document).ready(function () {
+		$('#container').layout();
+	});
+
+	</script>
+
+</head>
+<body class="ui-widget ui-main">
+<div id="container" class="ui-corner-all" style="overflow-x: hidden; overflow-y: hidden; ">      <!--class="ui-layout-container"-->
+	<div class="pane ui-layout-center ui-layout-pane ui-layout-pane-center ui-layout-pane-hover ui-layout-pane-center-hover ui-layout-pane-open-hover ui-layout-pane-center-open-hover" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; z-index: 0; position: absolute; display: block; visibility: visible; top: 6px; bottom: 6px; left: 6px; right: 6px; width: 1018px; height: 602px; ">
+		Center
+		<p><a href="http://layout.jquery-dev.net/demos.html"><b>Go to the Demos page</b></a></p>
+	</div>
+	
+	<!--<div class="ui-layout-north" style="position: absolute; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; bottom: auto; width: auto; z-index: 0; top: 0px; left: 0px; right: 0px; visibility: visible; display: block; height: 93px; ">
+	<!--<div class="ui-accordion-header ui-helper-reset ui-helper-reset ui-state-default ui-state-active ui-corner-all"><h1 style="margin-left: 10px;">Soule Royale</h1></div>
+	<div class="content" style="position: relative; ">
+		I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
+	</div>
+	<ul class="toolbar">
+		<li id="tbarToggleNorth" class="first button-toggle button-toggle-north"><span></span>Toggle NORTH</li>
+		<li id="tbarOpenSouth" class="button-open button-open-south" title="Open"><span></span>Open SOUTH</li>
+		<li id="tbarCloseSouth" class="button-close button-close-south" title="Close"><span></span>Close SOUTH</li>
+		<li id="tbarPinWest" class="button-pin button-pin-west button-pin-up button-pin-west-up" pin="up" title="Pin"><span></span>Pin/Unpin WEST</li>
+		<li id="tbarPinEast" class="last button-pin button-pin-east button-pin-up button-pin-east-up" pin="up" title="Pin"><span></span>Pin/Unpin EAST</li>
+	</ul>
+	</div>-->
+	<div id="" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; cursor: default; top: 0px; width: 1152px; height: 6px; left: 0px; " class="resizer resizer-north resizer-closed resizer-north-closed"><div id="" style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; display: block; width: 1152px; height: 6px; left: 0px; top: 0px; " class="toggler toggler-north toggler-closed toggler-north-closed" title="Open This Pane"></div></div>
+</div>
+
+
+	<!--<div class="ui-widget-header ui-corner-all ui-layout-north ui-layout-pane-north" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; width: auto; top: 0px; bottom: auto; left: 0px; right: 0px; z-index: 0; height: 19px; position: absolute; display: none; visibility: visible; ">
+        <span>Soule Royale</span>
+        </div>-->
+	<!-- <div class="pane ui-layout-south ui-layout-pane ui-layout-pane-south" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; width: auto; bottom: 0px; left: 0px; right: 0px; z-index: 0; top: auto; height: 19px; position: absolute; display: none; visibility: visible; ">South</div>
+	--><div class="pane ui-widget ui-layout-east ui-layout-pane ui-layout-pane-east" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; width: 178px; right: 0px; z-index: 0; left: auto; top: 6px; bottom: 6px; height: 602px; position: absolute; visibility: visible; display: none; ">
+        <div class="ui-widget ui-widget-content ui-corner-all">
+             <div class="ui-accordion-header ui-helper-reset ui-state-default ui-state-active ui-corner-top">East</div>
+             <div class="ui-widget-content">textfdg dgxgf hgghcgjhgj ghhj</div>
+        </div>
+        </div>
+	<div class="pane ui-layout-west ui-layout-pane ui-layout-pane-west" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; width: 178px; left: 0px; right: auto; z-index: 0; top: 6px; bottom: 6px; height: 602px; position: absolute; visibility: visible; display: none; ">
+        <div id="accordion" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" role="tablist">
+				<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-state-active ui-corner-top" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#">Section 1</a></h3>
+				<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active" style="height: 122px; " role="tabpanel">
+					<p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+				</div>
+				<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span><a href="#">Section 2</a></h3>
+				<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="height: 122px; display: none; " role="tabpanel">
+					<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
+				</div>
+				<h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span><a href="#">Section 3</a></h3>
+				<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="height: 122px; display: none; " role="tabpanel">
+					<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
+					<ul>
+						<li>List item one</li>
+						<li>List item two</li>
+						<li>List item three</li>
+					</ul>
+				</div>
+			</div>
+        </div>
+<!-- <div style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; top: 0px; cursor: pointer; width: 1052px; height: 6px; left: 0px; " class="ui-layout-resizer ui-layout-resizer-north ui-layout-resizer-closed ui-layout-resizer-north-closed ui-draggable-disabled" title="Slide Open" aria-disabled="true"><div id="" style="position: absolute; display: block; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; width: 48px; height: 6px; left: 501px; top: 0px; " class="ui-layout-toggler ui-layout-toggler-north ui-layout-toggler-closed ui-layout-toggler-north-closed" title="Open"></div></div><div style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; bottom: 0px; cursor: pointer; width: 1052px; height: 6px; left: 0px; " class="ui-layout-resizer ui-layout-resizer-south ui-layout-resizer-closed ui-layout-resizer-south-closed ui-draggable-disabled" title="Slide Open" aria-disabled="true"><div id="" style="position: absolute; display: block; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; width: 48px; height: 6px; left: 501px; top: 0px; " class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-closed ui-layout-toggler-south-closed" title="Open"></div></div><div style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; left: 0px; cursor: pointer; height: 624px; width: 6px; top: 6px; " class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-closed ui-layout-resizer-west-closed ui-draggable-disabled" title="Slide Open" aria-disabled="true"><div id="" style="position: absolute; display: block; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; height: 48px; width: 6px; top: 287px; left: 0px; " class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-closed ui-layout-toggler-west-closed" title="Open"></div></div><div style="position: absolute; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 1px; text-align: left; overflow-x: hidden; overflow-y: hidden; z-index: 2; right: 0px; cursor: pointer; height: 624px; width: 6px; top: 6px; " class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-closed ui-layout-resizer-east-closed ui-draggable-disabled" title="Slide Open" aria-disabled="true"><div id="" style="position: absolute; display: block; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; overflow-x: hidden; overflow-y: hidden; text-align: center; font-size: 1px; z-index: 1; visibility: visible; cursor: pointer; height: 48px; width: 6px; top: 287px; left: 0px; " class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-closed ui-layout-toggler-east-closed" title="Open"></div></div></div>
+    -->
+</body></html>
