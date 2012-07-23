@@ -3,6 +3,7 @@
 //http://www.tig12.net/downloads/apidocs/zf/index.html
 class Application_Form_ContactezNous extends Zend_Form
 {
+	//Champs de la classe
 	public $buttonDecorators = array(
         'ViewHelper',
         array(array('data' => 'HtmlTag'), array('tag' => 'td', 'class' => 'element')),
@@ -10,6 +11,9 @@ class Application_Form_ContactezNous extends Zend_Form
         array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
     );
 	
+	/**
+	Méthode d'initialisation appelée via le contructeur
+	*/
 	public function init()
     {
         $this->setMethod('post');
@@ -51,7 +55,7 @@ class Application_Form_ContactezNous extends Zend_Form
 		$message = new Zend_Form_Element_Textarea('message');
 		$message->setLabel('Message')
 				->setAttrib('cols', '35')
-				->setAttrib('rows', '10')
+				->setAttrib('rows', '8')
 				->setRequired(true)
 				->addFilter('StripTags')
 				->addFilter('StringTrim')
@@ -72,8 +76,8 @@ class Application_Form_ContactezNous extends Zend_Form
 								/*"height" => 50,	*/							
 								"fontSize" => 14,
 								"width" => 100,
-								"imgDir" => "libs/",
-								"imgUrl" => "libs/",
+								"imgDir" => "images/tmp/",
+								"imgUrl" => "images/tmp/",
 								"DotNoiseLevel" => 20,
 								"LineNoiseLevel" => 2
 							)
@@ -85,7 +89,7 @@ class Application_Form_ContactezNous extends Zend_Form
 				->setDecorators(array('SRCaptcha'));
 				
 		
-		$envoyer = new Zend_Form_Element_Submit('envoyer');
+		$envoyer = new Zend_Form_Element_Submit('Envoyer');
 		$envoyer->setAttrib('id', 'boutonenvoyer')
 			->setDecorators($this->buttonDecorators);
 		
@@ -96,7 +100,7 @@ class Application_Form_ContactezNous extends Zend_Form
     {
         $this->setDecorators(array(
             'FormElements',
-            array('HtmlTag', array('tag' => 'table', 'class' => 't4ftable')),
+            array('HtmlTag', array('tag' => 'table', 'class' => 'SRFromTable')),
             'Form',
         ));
     }

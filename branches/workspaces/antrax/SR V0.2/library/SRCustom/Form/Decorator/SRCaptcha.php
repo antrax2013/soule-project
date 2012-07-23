@@ -15,7 +15,7 @@ class SRCustom_Form_Decorator_SRCaptcha extends Zend_Form_Decorator_Captcha
 		
         /*if ($translator = $element->getTranslator()) $label = $translator->translate($label);*/
         
-		//Si l'élément posséde l'attribut requiered, on ajoute la mise en forme
+		//Si l'ï¿½lï¿½ment possï¿½de l'attribut requiered, on ajoute la mise en forme
 		if ($element->isRequired()) 
 		{
 			$chaine = "<span class='required'>*</span>&nbsp;";
@@ -85,9 +85,9 @@ class SRCustom_Form_Decorator_SRCaptcha extends Zend_Form_Decorator_Captcha
 		$captcha = $element->getCaptcha();
 		$markup = $captcha->render($view, $element);
 		
-		$output = "<tr><td>$label<br /><span class='captcha-img'>$markup</span> $hidden</td><td>";
+		$output = "<tr  class='SRFormTable'><td class='SRFormTable'>$label<br /><span class='captcha-img'>$markup</span> $hidden</td><td class='SRFormTable'>";
 		if(!empty($desc)) $output .="$desc<br />";
-		$output .= "$input</td><td>$errors</td></tr>";
+		$output .= "$input</td><td class='SRFormTable'>$errors</td></tr>";
 		
 
         switch ($placement) {

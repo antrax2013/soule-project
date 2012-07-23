@@ -8,22 +8,26 @@ body,html {
 	background: #fff url(./custom-theme/images/ui-bg_diagonals-small_50_262626_40x40.png) 50% 50%;
 }
 
+/* Font */
 h1 { font-size:1.4em; }
 h2 { font-size:1.2em; }
 h3 { font-size:1.1em; }
-
-input{ width:20em;} 
-
-
 a { color: #222; text-decoration: none; }
 a:hover{ text-decoration: underline;}	
 
-.erreur,.error,.errors, .rouge, .Equipe1 { color:red;}
+/* Formulaire */
+input{ width:20em;} 
+.captcha-img img { border: solid 1px #aaa; }
+.erreur,.error,.errors, .rouge { color:red;}
 .errors ul { list-style-type: none;}
+.obligatoire, .required{ /*color: #b8ec79;*/ text-decoration: none; font-weight:bold; }
+.SRFormTable  table, .SRFormTable  tr, .SRFormTable  td { vertical-align : top;}
+
+/* .formTable td { vertical-align: top; text-align: right;} */
 
 .Equipe2 { color:blue;}
-.obligatoire { font-weight:bold;}
-.required{ /*color: #b8ec79;*/ text-decoration: none; font-weight:bold; }
+.Equipe1 { color:red;}
+
 
 /* Conteneurs */
 #Wrapper { 
@@ -31,9 +35,6 @@ a:hover{ text-decoration: underline;}
 	/*background:purple;*/
 	/*margin: 1% 1%;*/
 }
-
-.formTable td { vertical-align: top; text-align: right;}
-
 #Header { 
 	margin: 0;
 	padding:0;
