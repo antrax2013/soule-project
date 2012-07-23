@@ -9,4 +9,14 @@ $this->headMeta()->appendName('description', "Si vous rencontrez un problème ou
 ?>
 <h1>Contactez-nous</h1>
 <p>Les champs dont le libellé est précédé d'une "<span class='etoile'>*</span>" sont obligatoires. Merci de votre compréhension.</p>
-<?php echo $this->form; $this->jQuery()->addJavascriptFile($this->baseUrl()."/js/".'helpers/validForms.js');?>
+<?php
+echo $this->form;
+$this->jQuery()->addJavascriptFile($this->baseUrl()."/js/".'helpers/validForms.js');
+?>
+<script language="JavaScript" type="text/javascript">
+    $(document).ready(function () {
+        var validator = new validForm();
+        validator.setAction('/contactez-nous/validateform');
+        validator.init();
+    });
+</script>

@@ -14,7 +14,7 @@ class SRCustom_Form_Decorator_SRInput extends Zend_Form_Decorator_Abstract
 		
         /*if ($translator = $element->getTranslator()) $label = $translator->translate($label);*/
         
-		//Si l'élément posséde l'attribut requiered, on ajoute la mise en forme
+		//Si l'ï¿½lï¿½ment possï¿½de l'attribut requiered, on ajoute la mise en forme
 		if ($element->isRequired()) 
 		{
 			$chaine = "<span class='required'>*</span>&nbsp;";
@@ -74,9 +74,9 @@ class SRCustom_Form_Decorator_SRInput extends Zend_Form_Decorator_Abstract
         $errors    = $this->buildErrors();
         $desc      = $this->buildDescription();
 		
-        $output = "<tr><td>$label</td><td>";
+        $output = "<tr class='SRFormTable'><td class='SRFormTable'>$label</td><td class='SRFormTable'>";
 		if(!empty($desc)) $output .="$desc<br />";
-		$output .= "$input</td><td>$errors</td></tr>";
+		$output .= "$input</td><td class='SRFormTable'>$errors</td></tr>";
 
         switch ($placement) {
             case (self::PREPEND):
