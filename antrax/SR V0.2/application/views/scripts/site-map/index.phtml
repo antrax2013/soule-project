@@ -10,7 +10,8 @@ $this->headMeta()->appendName('description', "Plan du site Soule Royale. La cart
 <h1>Soule Royale: Le plan du site</h1>
 <ul>
 	<li><a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'index'));?>" title="Soule royale: la page d'accueil du site">Accueil</a></li>
-	<li><a href="<?php echo $this->url(array('controller'=>'nouveautes', 'action'=>'index'));?>" title="Soule royale: l'actualité du site">Nouveautés</a></li>
+    <li><a href="<?php echo $this->url(array('controller'=>'jeux', 'action'=>'index'));?>" title="Soule royale: venez tester vos tactiques sur le simulateur">Simulateur</a></li>
+    <li><a href="<?php echo $this->url(array('controller'=>'nouveautes', 'action'=>'index'));?>" title="Soule royale: l'actualité du site">Nouveautés</a></li>
 	<li>Informations
 	<ul>
 		<li><a href="<?php echo $this->url(array('controller'=>'informations', 'action'=>'presentation-generale'));?>" title="Soule royale: présentation générale">Présentation générale</a>
