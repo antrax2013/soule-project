@@ -7,7 +7,7 @@
 				<a href="<?php echo $this->url(array('controller'=>'jeux', 'action'=>'index'));?>" title="Jouer à la Soule Royale">Jeux</a>
 				<ul class="Menu" style="text-align:center;">
 					<li id="sousMenu-1" class="ui-widget ui-widget-header">
-						<a href="<?php echo $this->url(array('controller'=>'jeux', 'action'=>'index'));?>" title="Venez parfaire vos tactiques de Soule Royale">Mode Entrainement</a>
+						<a href="<?php echo $this->url(array('controller'=>'jeux', 'action'=>'index'));?>" title="Venez parfaire vos tactiques de Soule Royale sur le simulateur">Simulateur</a>
 					</li>					
 				</ul>
 			</li>
