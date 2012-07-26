@@ -1,5 +1,5 @@
 ﻿<?php
-require_once "Interfaces_Library/Exception.php";
+require_once "SRCustom/Exception.php";
 
 abstract class AMatch
 {
@@ -326,8 +326,8 @@ abstract class AMatch
 		{
 			case "numeroTourEnCours":
 				return $this->_numeroTourEnCours;
-			default: 
-				throw new Soule_Indefine_Field_Exception("La propriete \"$a_name\" est indefinie.");
+			default:
+                throw new Soule_Indefine_Field_Exception("La propriete \"$a_name\" est indefinie.");
 		}
 	}
 	

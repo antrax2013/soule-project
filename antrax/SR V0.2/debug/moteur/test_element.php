@@ -9,19 +9,19 @@
 <h1>Tests Classe Element</h1>
 <?PHP
 require_once 'test.php';
-require_once '../../library/Moteur/element.php';
+require_once 'Moteur/element.php';
 
 $e1 = new Element();
-echo "E1: position départ->".$e1->position."<br />";
+echo "E1: position dï¿½part->".$e1->position."<br />";
 $e1->avance();
 $e1->avance();
-echo "E1:a avancé 2 fois ->".$e1->position."<br />";
+echo "E1:a avancï¿½ 2 fois ->".$e1->position."<br />";
 $e1->recule();
-/*echo "E1:a reculé 1 fois  ->".$e1->position."<br />";
+/*echo "E1:a reculï¿½ 1 fois  ->".$e1->position."<br />";
 $e1->position(4);
-echo "E1:déplace directement en 4 ->".$e1->position."<br />";*/
+echo "E1:dï¿½place directement en 4 ->".$e1->position."<br />";*/
 $e1->position=5;
-echo "E1:déplace directement en 5 par autre méthode ->".$e1->position."<br />";
+echo "E1:dï¿½place directement en 5 par autre mï¿½thode ->".$e1->position."<br />";
 $e1->cas=12;
 
 

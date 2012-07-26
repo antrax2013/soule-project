@@ -1,5 +1,5 @@
 ﻿<?php
-require_once "Interfaces_Library/Exception.php";
+require_once "SRCustom/Exception.php";
 
 /**
 * Class gérant le concepte de joueur de soule, herite de Element
@@ -33,7 +33,7 @@ class Souleur extends Element
 	*/
 	private function ecrire_ptVie($a_val) 
 	{
-		require_once "Interfaces_Library/Validators/UnsignedInt.php";
+		require_once "SRCustom/Validator/UnsignedInt.php";
 		if(Valide_UnsignedInt::isUInt($a_val))
 		{
 			$this->_ptVie = $a_val;
@@ -43,8 +43,8 @@ class Souleur extends Element
 			$this->_ptVie = null; //remise a� null
 			if($a_val < 1) 
 			{ 
-				throw new Souleur_Internal_Exception("Le nombre de point est inferieur a� 1"); 
-			}
+				throw new Souleur_Internal_Exception("Le nombre de point est inferieur a� 1");
+            }
 			else
 			{
 				throw new Soule_Format_Exception("Le format invalide, un int est attendu.");
@@ -96,8 +96,8 @@ class Souleur extends Element
 	*/
 	public function __call($a_name, $a_val="")
 	{ 
-		throw new Soule_Indefine_Methode_Exception("La Méthode \"$a_name\" est inexistante."); 
-	}
+		throw new Soule_Indefine_Methode_Exception("La Méthode \"$a_name\" est inexistante.");
+    }
 	
 	/** 
 	* Constructeur parametre, par defaut avec une position à 0 et 4 points de vie

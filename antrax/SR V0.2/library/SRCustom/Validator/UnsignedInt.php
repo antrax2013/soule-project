@@ -2,7 +2,7 @@
 /**
  * @see Valide_Int
  */
-require_once "Interfaces_Library/Validators/Int.php";
+require_once "SRCustom/Validator/Int.php";
 
 
 class Valide_UnsignedInt
