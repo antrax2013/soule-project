@@ -8,14 +8,18 @@
 <body>
 <h1>Tests Classe Match</h1>
 <?PHP
-require_once 'test.php';
-require_once '../classes/element.php';
-require_once '../classes/souleur.php';
-require_once '../classes/a_equipe.php';
-require_once '../classes/a_match.php';
+$path_library = 'Moteur/';
+$path_match = $path_library.'Match/';
+$path_equipe = $path_library.'Equipe/';
 
-require_once '../classes/equipe/equipeStd.php';
-require_once '../classes/match/matchStd.php';
+require_once 'test.php';
+require_once $path_library.'Element.php';
+require_once $path_library.'Souleur.php';
+require_once $path_library.'AbstractEquipe.php';
+require_once $path_library.'AbstractMatch.php';
+
+require_once $path_equipe.'EquipeStd.php';
+require_once $path_match.'MatchStd.php';
 
 $ma = new Match();
 

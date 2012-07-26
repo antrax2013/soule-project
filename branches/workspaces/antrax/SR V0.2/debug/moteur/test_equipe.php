@@ -9,11 +9,11 @@
 <h1>Tests Classe Equipe</h1>
 <?PHP
 require_once 'test.php';
-require_once '../classes/element.php';
-require_once '../classes/souleur.php';
-require_once '../classes/a_equipe.php';
+require_once 'Moteur/Element.php';
+require_once 'Moteur/Souleur.php';
+require_once 'Moteur/AbstractEquipe.php';
 
-require_once '../classes/equipe/equipeStd.php';
+require_once 'Moteur/Equipe/EquipeStd.php';
 
 
 $eq = new Equipe();

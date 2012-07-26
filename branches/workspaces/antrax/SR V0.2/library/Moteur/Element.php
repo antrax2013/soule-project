@@ -1,5 +1,5 @@
 ﻿<?php
-require_once "Interfaces_Library/Exception.php";
+require_once "/SRCustom/Exception.php";
 
 /**
 * Class definissant le concept d'élement
@@ -33,7 +33,8 @@ class Element
 	*/
 	private function ecrire_position($a_val) 
 	{
-		require_once "Interfaces_Library/Validators/Int.php";
+
+        require_once "SRCustom/Validator/Int.php";
 		if(Valide_Int::isInt($a_val))
 		{
 			$this->_position = $a_val;

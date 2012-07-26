@@ -9,8 +9,8 @@
 <h1>Tests Classe Souleur</h1>
 <?PHP
 require_once 'test.php';
-require_once '../../library/Moteur/element.php';
-require_once '../../library/Moteur/souleur.php';
+require_once 'Moteur/element.php';
+require_once 'Moteur/souleur.php';
 
 $s1 = new Souleur();
 $s2 = new Souleur(5);

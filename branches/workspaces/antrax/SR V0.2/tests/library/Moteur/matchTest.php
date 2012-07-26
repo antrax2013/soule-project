@@ -150,6 +150,18 @@ class MatchStdTest extends PHPUnit_Framework_TestCase
 		catch (Exception $expected) { return; }
 		$this->fail('An expected exception has not been raised.');
 	}
+
+    public function test_MatchStdTest_initiale_impossible2()
+    {
+        $this->setUp();
+
+        $Equipe1= array("0;-1;1;1;1;1;1;1;1;1;1");
+        $Equipe2= array("1;3;2;2;2;1;2;2;3;2;1");
+
+        try{ $this->_ma->JoueTour($Equipe1[0], $Equipe2[0]); }
+        catch (Exception $expected) { return; }
+        $this->fail('An expected exception has not been raised.');
+    }
 	
 	/**
 	* test sortie par sa ligne d'embut �quipe 1

@@ -12,7 +12,7 @@ require_once "Zend/Validate/Int.php";
 /**
  * @see Exception
  */
-require_once "Library/Interfaces_Library/Exception.php";
+require_once "SRCustom/Exception.php";
 
 /**
 * Class vérifiant des données sont des ints
