@@ -15,8 +15,11 @@ abstract class AMatch
 	
 	protected $_score = array(0,0); //Tableau des scores
 	protected $_buteur; /** @todo à voir ce qu'on en fait */
-	
-	private $_separateur = ";"; //séparateur des chaines action et initiale
+
+	const SEPARATEUR = ";"; //séparateur des chaines action et initiale
+
+    protected $maskInitial;
+    protected $maskAction;
 	
 	/** 
 	* Constructeur par défaut
@@ -50,13 +53,14 @@ abstract class AMatch
 	* @param [string] $a_init1, chaine contenant les positions des joueurs de l'équipe 1 séparées par un ";"
 	* @param [string] $a_init2, chaine contenant les positions des joueurs de l'équipe 2 séparées par un ";"
 	*/
-	protected function Init($a_init1, $a_init2)
+	public function Init($a_init1, $a_init2)
 	{
-		$this->_numeroTourEnCours++;
+		//echo get_class($this)." ".$this->maskInitial;
+        $this->_numeroTourEnCours++;
 
-		//Tratiement des initiales
+		//Traitement des initiales
 		$this->TraiteInit($a_init1, 0);
-		$this->TraiteInit($a_init2, 1);
+        $this->TraiteInit($a_init2, 1);
 	}
 	
 	/**
@@ -66,7 +70,7 @@ abstract class AMatch
 	*/
 	protected function DecoupeChaine($a_chaine) 
 	{ 
-		return preg_split("/[".$this->_separateur."]+/", $a_chaine); 
+		return preg_split("/[".self::SEPARATEUR."]+/", $a_chaine);
 	}
 	
 	/**
@@ -76,7 +80,7 @@ abstract class AMatch
 	*/
 	private function TraiteInit($a_init, $a_indiceEquipe=0)
 	{
-		//Validation de l'initiale
+        //Validation de l'initiale
 		$this->CheckInit($a_init);
 		
 		//Découpage de la chaine contenant les initiales
@@ -104,7 +108,7 @@ abstract class AMatch
 	* @param [string] $a_action, caractère action 0, +, -, ou un numéro de joueur sous forme hexa
 	* @param [int] $a_indiceSouleur, numero du joueur
 	*/
-	protected function TraiteAction($a_action, $a_indiceSouleur) 
+	protected function TraiteAction($a_action, $a_indiceSouleur)
 	{
 		$joueur = $this->_equipe[$this->_joueurActif][$a_indiceSouleur]; //Pour simplifier l'écriture
 		

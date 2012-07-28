@@ -15,6 +15,5 @@ class Equipe extends AEquipe
 		}
 		return $this;
 	}	
-}
-
+};
 ?>

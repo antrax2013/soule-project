@@ -4,7 +4,10 @@ require_once "SRCustom/Exception.php";
 
 class Match extends AMatch
 {
-	/** 
+    const MASK_INITIAL = "1-3";
+    const MASK_ACTION = "0-9A-BX+\-";
+
+    /**
 	* Constructeur
 	* @return [Match] renvoi $this
 	*/		
@@ -22,6 +25,9 @@ class Match extends AMatch
 		$this->_equipe[] = new Equipe();
 		
 		$this->_nbJoueurs = 11;
+
+        $this->maskInitial = self::MASK_INITIAL;
+        $this->maskAction = self::MASK_ACTION;
 		
 		return $this;
 	}
@@ -35,10 +41,10 @@ class Match extends AMatch
 	public function JoueTour($a_action1, $a_action2)
 	{
 		//Si initiale on déroute vars la méthode de gestion des initiales
-		if($this->_numeroTourEnCours == 0) 
+		/*if($this->_numeroTourEnCours == 0)
 		{
 			return $this->Init($a_action1, $a_action2);
-		}
+		}*/
 		
 		//Validation des actions
 		$this->CheckAction($a_action1);
@@ -74,7 +80,7 @@ class Match extends AMatch
 	* @param [int] $a_numSouleur, le numéro du buteur
 	* @return [bool] renvoie toujours vrai
 	*/
-	private function GestionMarque($a_numSouleur) 
+	protected function GestionMarque($a_numSouleur)
 	{ 
 		//$this->AlterneJoueur(); //Il faut réinversé le joueur actif
 		$this->_buteur = $a_numSouleur;
@@ -88,10 +94,10 @@ class Match extends AMatch
 	* @throws Soule_Format_Exception
 	* @see preg_match
 	*/
-	protected function CheckInit($a_init) 
-	{ 
-		$tmp = preg_replace("/[;]/", "", $a_init); //on élimine les ";"
-		$tmp = preg_match("/[1-3]{".$this->_nbJoueurs."}/", $tmp);
+	protected function CheckInit($a_init)
+	{
+        $tmp = preg_replace("/[".parent::SEPARATEUR."]/", "", $a_init); //on élimine les ";"
+		$tmp = preg_match("/[".$this->maskInitial."]{".$this->_nbJoueurs."}/", $tmp);
 		if($tmp == 0 || $tmp == false) throw new Soule_Format_Exception("Initiale invalide");
 		else return true;
 	}
@@ -106,8 +112,8 @@ class Match extends AMatch
 	*/
 	protected function CheckAction($a_action) 
 	{ 
-		$tmp = preg_replace("/[;]/", "", $a_action); //on élimine les ";"
-		$tmp = preg_match("/[0-9A-BX+\-]{".$this->_nbJoueurs."}/i", $tmp); //insensible à la casse
+		$tmp = preg_replace("/[".parent::SEPARATEUR."]/", "", $a_action); //on élimine les ";"
+		$tmp = preg_match("/[".$this->maskAction."]{".$this->_nbJoueurs."}/i", $tmp); //insensible à la casse
 		if($tmp == 0 || $tmp == false) throw new Soule_Format_Exception("Action invalide");
 		else return true;
 	}
@@ -120,8 +126,9 @@ class Match extends AMatch
 	public function __toString()
 	{
 		//return parent::__toString();
-		$chaine= "**************<br>Tour N:".$this->_numeroTourEnCours." ";
-		$chaine.= "Joueur Actif:".($this->_joueurActif+1)."<br />";
+        $tour = $this->_numeroTourEnCours == 0 ? 'Initial': $this->_numeroTourEnCours;
+		$chaine= "**************<br>Tour N:".$tour." ";
+		$chaine.= "Joueur Actif:".($this->numeroJoueurActif)."<br />";
 		
 		$ligne_Blessure="<th>Tableau Blessures</th>";
 		$ligne_Blessure_Eq1="<td>Equipe 1</td>";
@@ -148,7 +155,7 @@ class Match extends AMatch
 		if($this->MatchTermine())
 		{
 			if(empty($this->_buteur)) $ligne.= "<p>Match Termin�</p>";
-			else $ligne.= "<p>TuchDown du numero ".$this->_buteur." de l'equipe ".$this->_joueurActif."</p>";
+			else $ligne.= "<p>TuchDown du numero ".$this->_buteur." de l'equipe ".($this->numeroJoueurActif)."</p>";
 		}
 		$ligne.="<br> <table border='1'><tr>";
 		$ligneSoule="";
@@ -186,5 +193,52 @@ class Match extends AMatch
 		$ligne.="</table>";
 		return $chaine.$ligne;
 	}
-}
+
+    /**
+     * Accesseur public en lecture sur les champs privés
+     * @param [string] $a_name, le nom du champ à lire
+     * @return [object, null] la valeur du champ ou null en cas d'exception
+     * @throws Soule_Indefine_Field_Exception
+     */
+    public function __get($a_name)
+    {
+        switch($a_name)
+        {
+            case "numeroTourEnCours":
+                return $this->_numeroTourEnCours;
+            case "positionSoule":
+                return $this->_soule->position;
+            case "nbTourMax":
+                return $this->_nbTourMax;
+            case "numeroJoueurActif":
+                return $this->_joueurActif+1; //+1 car la position du tableau des joueurs est indicé à partir de 0
+            default:
+                throw new Soule_Indefine_Field_Exception("La propriete \"$a_name\" est indefinie.");
+        }
+    }
+
+    /**
+     * Accesseur public en écriture sur les champs
+     * attention en cas de chainage d'affectation, c'est la dernière operande qui est propagée
+     * @param [string] $a_name, le nom du champ à modifier
+     * @param [object] $a_val, la valeur à ecrire dans le champ
+     * @return [object, null] la valeur du champ ou null en cas d'exception
+     * @example $elm->position = 3
+     * @throws Soule_Indefine_Field_Exception
+     */
+    public function __set($a_name, $a_val)
+    {
+        switch($a_name)
+        {
+            case "numeroTourEnCours":
+                return $this->_numeroTourEnCours = $a_val;//-1; //-1 car le tour n°2 est le résultat de la seconde application des actions
+            case "positionSoule":
+                return $this->_soule->position = $a_val;
+            case "numeroJoueurActif":
+                return $this->_joueurActif = $a_val-1; //-1 car la position du tableau des joueurs est indicé à partir de 0
+            default:
+                throw new Soule_Indefine_Field_Exception("La propriété \"$a_name\" est indefinie.");
+        }
+    }
+};
 ?>
