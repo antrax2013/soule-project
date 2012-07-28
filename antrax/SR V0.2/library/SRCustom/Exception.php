@@ -21,5 +21,8 @@ class Soule_Indefine_Field_Exception extends Soule_Exception { }
 class Soule_Moteur_Exception extends Soule_Exception { }
 class Soule_Moteur_Iternal_Exception extends Soule_Moteur_Exception { }
 
+class Simulateur_Exception extends Soule_Exception { }
+class Simulateur_Iternal_Exception extends Soule_Moteur_Exception { }
+
 class Souleur_Internal_Exception extends Soule_Moteur_Iternal_Exception { }
 ?>

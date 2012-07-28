@@ -20,5 +20,5 @@ class Valide_UnsignedInt
 			return $a_val >= 0;
 		}
 	}
-} 
+};
 ?>

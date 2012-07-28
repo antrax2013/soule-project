@@ -47,5 +47,5 @@ class Valide_Int extends Zend_Validate_Int
 		}
 		return true;
 	}
-} 
+};
 ?>
