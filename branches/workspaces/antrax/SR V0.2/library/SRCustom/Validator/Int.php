@@ -47,5 +47,25 @@ class Valide_Int extends Zend_Validate_Int
 		}
 		return true;
 	}
+
+    /**
+     * Méthode static public vérifiant que le paramétre est un entier positif bornée entre min et max
+     * @param [string, int] $a_val, la donnée à vérifier
+     * @param [int] $a_min, valeur à laquelle $a_val ne doit pas être inférieure
+     * @param [int] $a_max, valeur à laquelle $a_val ne doit pas être supérieure
+     * @return [bool] renvoie vrai si le paramétre est un entier faux sinon
+     * @throws Exception see preg_match
+     */
+    public static function isMinMaxInt($a_val, $a_min, $a_max)
+    {
+        if(!Valide_Int::isInt($a_val) || $a_val < $a_min || $a_val > $a_max)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 };
 ?>

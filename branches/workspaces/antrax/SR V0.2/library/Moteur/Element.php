@@ -35,16 +35,16 @@ class Element
 	{
 
         require_once "SRCustom/Validator/Int.php";
-		if(Valide_Int::isInt($a_val))
-		{
-			$this->_position = $a_val;
-		}
-		else
-		{
-			$this->_position = null; //remise à null de la position
-			throw new Soule_Format_Exception("Le format invalide, un int est attendu.");
-		}
-		return $this->lire_position();
+        if(Valide_Int::isInt($a_val))
+        {
+            $this->_position = $a_val;
+        }
+        else
+        {
+            $this->_position = null; //remise à null de la position
+            throw new Soule_Format_Exception("Le format invalide, un int est attendu.");
+        }
+        return $this->lire_position();
 	}
 
 	/** 
