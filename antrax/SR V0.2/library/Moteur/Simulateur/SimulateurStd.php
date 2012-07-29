@@ -4,7 +4,7 @@
 
 class Simulateur extends Match
 {
-    const MASK_INITIAL = "0-3\-";
+    const MASK_INITIAL = "0-#\-";
 
      /**
      * Constructeur
@@ -17,36 +17,21 @@ class Simulateur extends Match
     {
         parent::__construct();
 
-        $this->positionSoule = $a_positionSoule;
-        $this->numeroTourEnCours = $a_numeroTour;
-        $this->numeroJoueurActif = $a_numeroJoueurActif;
+        $this->positionSoule($a_positionSoule);
+        $this->numeroTourEnCours($a_numeroTour);
+        $this->numeroJoueurActif($a_numeroJoueurActif);
 
-        $this->maskInitial = self::MASK_INITIAL;
+        $this->maskInitial = str_replace ("#", $this->_longeurTerrain, self::MASK_INITIAL);
 
         return $this;
     }
 
     /**
-     * Méthode protegée chargeant les initiales des souleurs
-     * @param [string] $a_init1, chaine contenant les positions des joueurs de l'équipe 1 séparées par un ";"
-     * @param [string] $a_init2, chaine contenant les positions des joueurs de l'équipe 2 séparées par un ";"
-     */
-    public function Init($a_init1, $a_init2)
-    {
-        //echo get_class($this)." ".$this->maskInitial;
-        $this->_numeroTourEnCours++;
-
-        //Traitement des initiales
-        $this->TraiteInit($a_init1, 0);
-        $this->TraiteInit($a_init2, 1);
-    }
-
-    /**
-     * Méthode privée chargeant les initiales des souleurs
+     * Méthode protégée chargeant les initiales des souleurs
      * @param [string] $a_init, chaine contenant les positions des joueurs de l'équipe séparées par un ";"
      * @param [int] $a_indiceEquipe, indice de l'equipe dans le tableau des equipes (0 ou 1)
      */
-    private function TraiteInit($a_init, $a_indiceEquipe=0)
+    protected function TraiteInit($a_init, $a_indiceEquipe=0)
     {
         //echo "ici";
 

@@ -4,7 +4,7 @@ require_once "SRCustom/Exception.php";
 
 class Match extends AMatch
 {
-    const MASK_INITIAL = "1-3";
+    const MASK_INITIAL = "1-#";
     const MASK_ACTION = "0-9A-BX+\-";
 
     /**
@@ -26,7 +26,7 @@ class Match extends AMatch
 		
 		$this->_nbJoueurs = 11;
 
-        $this->maskInitial = self::MASK_INITIAL;
+        $this->maskInitial = str_replace ("#", $this->_longeurTerrain, self::MASK_INITIAL);
         $this->maskAction = self::MASK_ACTION;
 		
 		return $this;
@@ -193,52 +193,5 @@ class Match extends AMatch
 		$ligne.="</table>";
 		return $chaine.$ligne;
 	}
-
-    /**
-     * Accesseur public en lecture sur les champs privés
-     * @param [string] $a_name, le nom du champ à lire
-     * @return [object, null] la valeur du champ ou null en cas d'exception
-     * @throws Soule_Indefine_Field_Exception
-     */
-    public function __get($a_name)
-    {
-        switch($a_name)
-        {
-            case "numeroTourEnCours":
-                return $this->_numeroTourEnCours;
-            case "positionSoule":
-                return $this->_soule->position;
-            case "nbTourMax":
-                return $this->_nbTourMax;
-            case "numeroJoueurActif":
-                return $this->_joueurActif+1; //+1 car la position du tableau des joueurs est indicé à partir de 0
-            default:
-                throw new Soule_Indefine_Field_Exception("La propriete \"$a_name\" est indefinie.");
-        }
-    }
-
-    /**
-     * Accesseur public en écriture sur les champs
-     * attention en cas de chainage d'affectation, c'est la dernière operande qui est propagée
-     * @param [string] $a_name, le nom du champ à modifier
-     * @param [object] $a_val, la valeur à ecrire dans le champ
-     * @return [object, null] la valeur du champ ou null en cas d'exception
-     * @example $elm->position = 3
-     * @throws Soule_Indefine_Field_Exception
-     */
-    public function __set($a_name, $a_val)
-    {
-        switch($a_name)
-        {
-            case "numeroTourEnCours":
-                return $this->_numeroTourEnCours = $a_val;//-1; //-1 car le tour n°2 est le résultat de la seconde application des actions
-            case "positionSoule":
-                return $this->_soule->position = $a_val;
-            case "numeroJoueurActif":
-                return $this->_joueurActif = $a_val-1; //-1 car la position du tableau des joueurs est indicé à partir de 0
-            default:
-                throw new Soule_Indefine_Field_Exception("La propriété \"$a_name\" est indefinie.");
-        }
-    }
 };
 ?>

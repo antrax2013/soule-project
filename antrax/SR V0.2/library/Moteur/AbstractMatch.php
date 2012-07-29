@@ -3,22 +3,79 @@ require_once "SRCustom/Exception.php";
 
 abstract class AMatch
 {
-	protected $_nbTourMax;
-	protected $_nbTouchDown; //Nombre de touchdown a inscrire pour gagner le match
+    /**
+     * Nombre de tours maximum du match
+     * @var unsigned integer
+     */
+    protected $_nbTourMax;
+
+    /**
+     * Nombre de touchdown a inscrire pour gagner le match
+     * @var unsigned integer
+     */
+	protected $_nbTouchDown;
+
+    /**
+     * Le numéro du tour en cours
+     * @var unsigned integer
+     */
 	protected $_numeroTourEnCours;
-	
-	protected $_nbJoueurs; //Nombre de souleurs par équipe
+
+    /**
+     * Le nombre de souleurs par équipe
+     * @var unsigned integer
+     */
+	protected $_nbJoueurs;
+
+    /**
+     * Tableau contenant les équipes
+     * @var Equipe[]
+     */
 	protected $_equipe = array(); //tableau qui va contenir les équipes
-	protected $_soule;
-	protected $_joueurActif; //indice du joueur actif
-	protected $_longeurTerrain; //nombre de cases par demi-terrain + la case centrale 3 pour un terrain standard
-	
-	protected $_score = array(0,0); //Tableau des scores
+
+    /**
+     * La soule
+     * @var Soule
+     */
+    protected $_soule;
+
+    /**
+     * Indice du joueur actif dans le tableau des équipes
+     * @var int
+     */
+    protected $_joueurActif;
+
+    /**
+     * nombre de cases par demi-terrain, 3 pour un terrain standard + la case centrale
+     * @var unsigned int
+     */
+	protected $_longeurTerrain;
+
+    /**
+     * Tableau des scores
+     * @var unsigned int
+     */
+    protected $_score = array(0,0);
+
+
 	protected $_buteur; /** @todo à voir ce qu'on en fait */
 
-	const SEPARATEUR = ";"; //séparateur des chaines action et initiale
+    /**
+     * Séparateur des chaines action et initiale
+     * @const char
+     */
+	const SEPARATEUR = ";"; //
 
+    /**
+     * Masque de validation des initiales pour expression régulière
+     * @const string
+     */
     protected $maskInitial;
+
+    /**
+     * Masque de validation des actions pour expression régulière
+     * @const string
+     */
     protected $maskAction;
 	
 	/** 
@@ -74,11 +131,11 @@ abstract class AMatch
 	}
 	
 	/**
-	* Méthode privée chargeant les initiales des souleurs
+	* Méthode protégée chargeant les initiales des souleurs
 	* @param [string] $a_init, chaine contenant les positions des joueurs de l'équipe séparées par un ";"
 	* @param [int] $a_indiceEquipe, indice de l'equipe dans le tableau des equipes (0 ou 1)
 	*/
-	private function TraiteInit($a_init, $a_indiceEquipe=0)
+	protected function TraiteInit($a_init, $a_indiceEquipe=0)
 	{
         //Validation de l'initiale
 		$this->CheckInit($a_init);
@@ -330,25 +387,86 @@ abstract class AMatch
 		{
 			case "numeroTourEnCours":
 				return $this->_numeroTourEnCours;
+            case "numeroJoueurActif":
+                return $this->_joueurActif+1;
 			default:
                 throw new Soule_Indefine_Field_Exception("La propriete \"$a_name\" est indefinie.");
 		}
 	}
-	
-	/** 
-	* Accesseur public en écriture. Pour cette classe aucun champ n'est accessible en écriture.
-	* @param [string] $a_name, le nom du champ à modifier
-	* @param [object] $a_val, la valeur à écrire dans le champ
-	* @return [object] la valeur du champ
-	* @throws Soule_Indefine_Field_Exception
-	* @example $elm[10]->position = 3
-	*/
-	public function __set($a_name, $a_val) 
-	{
-		throw new Soule_Indefine_Field_Exception("La propriete \"$a_name\" est indefinie.");
-	}
-	
-	/**
+
+    /**
+     * Accesseur en écriture protégé sur le champ _numeroTourEnCours
+     * @param [int] $a_val, la valeur à écrire dans le champ _nbTourMax
+     * @throws Soule_Format_Exception
+     * @return le numéro du tour en cours ou null en cas d'exception
+     */
+    protected function numeroTourEnCours ($a_val)
+    {
+        require_once "SRCustom/Validator/UnsignedInt.php";
+        if(Valide_UnsignedInt::isUInt($a_val))
+        {
+            $this->_numeroTourEnCours = $a_val;
+        }
+        else
+        {
+            $this->_numeroTourEnCours = null; //remise à null
+            throw new Soule_Format_Exception("Le format invalide, un int non signé est attendu.");
+        }
+        return $this->_numeroTourEnCours;
+    }
+
+    /**
+     * Accesseur en écriture protégé sur le champ _position de la soule
+     * @param [int] $a_val, la valeur à écrire dans le champ
+     * @throws Soule_Format_Exception, Soule_Moteur_Iternal_Exception
+     * @return la position de la soule affectée ou null en cas d'exception
+     */
+    protected function positionSoule ($a_val)
+    {
+        $this->_soule->position = $a_val;
+        if(!$this->PositionValide($a_val) )
+        {
+            try
+            {
+                $this->_soule->position = null; //remise à null de la position
+            }
+            catch (Soule_Format_Exception $exception) { } //rien à faire de particulier
+            throw new Soule_Moteur_Iternal_Exception("La position de la soule n'est pas valide.");
+
+        }
+        return $this->_soule->position;
+    }
+
+    /**
+     * Accesseur en écriture protégé sur le champ _position de la soule
+     * @param [int] $a_val, la valeur à écrire dans le champ
+     * @throws Soule_Format_Exception, Soule_Moteur_Iternal_Exception
+     * @return le numéro du joueur actif affecté ou null en cas d'exception
+     */
+    protected function numeroJoueurActif ($a_val)
+    {
+        require_once "SRCustom/Validator/UnsignedInt.php";
+        if(Valide_UnsignedInt::isUInt($a_val))
+        {
+            if($a_val <= count($this->_equipe) && $a_val!=0)
+            {
+                $this->_joueurActif = $a_val-1; //le numéro du joueur est le numero de son indice dans le tableau +1
+            }
+            else
+            {
+                throw new Soule_Moteur_Iternal_Exception("Numéro de joueur actif invalide (Min:1 Max:". count($this->_equipe).").");
+            }
+        }
+        else
+        {
+            $this->_nbTourMax = null; //remise à null
+            throw new Soule_Format_Exception("Le format invalide, un int non signé est attendu.");
+        }
+        return $this->_joueurActif;
+    }
+
+
+    /**
 	* Méthode publique d'impression sur la sortie standard
 	* @deprecated à n'utiliser qu'en debug
 	*/

@@ -23,8 +23,11 @@ require_once $path_equipe.'EquipeStd.php';
 require_once $path_match.'MatchStd.php';
 require_once $path_simulateur.'SimulateurStd.php';
 
+$positionSoule = 8;
+$numeroTour = 5;
+$joueurActif = 2;
 
-$sim = new Simulateur(-1,0,2);
+$sim = new Simulateur($positionSoule, $numeroTour, $joueurActif);
 
 //$Equipe1= array("1;1;1;1;1;1;1;1;1;1;1", "+;0;-;+;0;+;-;0;+;0;+", "+;+;+;-;+;+;0;+;+;0;+","+;+;+;+;+;+;+;+;+;+;+");
 //$Equipe2= array("1;3;2;2;2;1;2;2;3;2;1", "+;+;+;0;+;+;+;+;+;+;-", "1;-;-;+;1;6;1;1;0;4;0","2;+;0;6;6;5;6;6;+;9;-");
