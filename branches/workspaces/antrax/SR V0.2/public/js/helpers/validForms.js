@@ -3,9 +3,8 @@
  * 	@description Validation asynchrone de formulaire à l'aide de JQuery
  * 	@file public\js\helpers\validForms
  * 	@author Cyril Cophignon
- * 	Todo: Rendre générique, aujoud'hui ne travail que pour le formulaire contactez-nous
  */
-
+////console.log(data);
 /**
  * @class validForm
  * @description classe de validation asynchorne de formulaire via Ajax
@@ -60,14 +59,15 @@ var validForm = function () {
         var name='';
         var source = this;
 
-        $("input").each(function() //serrialisation des infos transmises
+
+        $("input, textarea").each(function() //serrialisation des infos à transmettre
         {
             name = $(this).attr('name');
+
             //Cas particulier du Captcha
             if(name == 'captcha')
             {
-                data[name+'-input'] = $(this).val();
-                data[name+'-id'] = $('captcha-id').val();
+                data[name+'[input]'] = $(this).val();
             }
             //autres éléments
             else data[name] = $(this).val();
@@ -96,4 +96,4 @@ var validForm = function () {
         cout += '</span>';
         return cout;
     }
-}
+};

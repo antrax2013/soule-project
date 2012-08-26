@@ -18,6 +18,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view = new Zend_View();
 		$view->setEncoding('utf-8');
 		$view->headMeta()->setHttpEquiv('Content-type', 'text/html; charset=utf-8');
+
+        //FlashMessage -> pour les pop-up
+        $view->addHelperPath('SRCustom/View/Helper', 'SR_View_Helper_');
 		
 		// Activation de jQuery
 		$view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');

@@ -16,10 +16,11 @@ notFloat;%value% n'est pas un nombre décimal.
 notGreaterThan;%value% n'est pas strictement supérieur à %min%.
 notInt; %value% n'est pas un nombre entier.
 notLessThan;%value% n'est pas strictement inférieur à %max%.
-isEmpty;Ce champ est vide; merci de le compléter.
-missingValue;Ce champ est vide; merci de le compléter.
-stringEmpty;Ce champ est vide; merci de le compléter.
+isEmpty;Ce champ est vide, merci de le compléter.
+missingValue;Ce champ est vide, merci de le compléter.
+stringEmpty;Ce champ est vide, merci de le compléter.
 regexNotMatch;%value% ne respecte pas le format %pattern%.
 stringLengthTooShort;%value% fait moins de %min% caractères.
 stringLengthTooLong;%value% fait plus de %max% caractères.
+badCaptcha;Le code n'est pas bon.
 
