@@ -61,7 +61,7 @@ en ligne de commande se déplacer dans c:\program files\EasyPHP5.2.10\php\
 	-> modifier le c:\program files\EasyPHP5.2.10\php\php-cli.ini et ajouter en fin 
 		zend_extension_ts="C:\Program Files\EasyPHP5.2.10\php\ext\php_xdebug.dll"
 		xdebug.remote_enable=1
-    		xdebug.remote_handler=dbgp
+    	xdebug.remote_handler=dbgp
 		xdebug.remote_mode=req
 		xdebug.idekey=default
 		xdebug.remote_autostart=1
